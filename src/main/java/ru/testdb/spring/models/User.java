@@ -1,28 +1,18 @@
 package ru.testdb.spring.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
     private String name;
 
-    @Min(value = 0, message = "Age should be greater than 0")
-    @Column(name = "age")
     private int age;
 
-    @NotEmpty(message = "Where is email?")
-    @Email(message = "It's not email")
-    @Column(name = "email")
     private String email;
 
     public User() {

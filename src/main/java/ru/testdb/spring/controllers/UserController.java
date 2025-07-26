@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.testdb.spring.models.User;
 import ru.testdb.spring.services.UserService;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -38,11 +36,8 @@ public class UserController {
     }
 
     @PostMapping()
-    public String create(@Valid @ModelAttribute("user") User user,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "new";
-        }
+    public String create(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "new";
 
         userService.save(user);
         return "redirect:/users";
@@ -55,12 +50,8 @@ public class UserController {
     }
 
     @PutMapping("/edit")
-    public String update(@Valid @ModelAttribute("user") User user,
-                         BindingResult bindingResult,
-                         @RequestParam(value = "id") int id) {
-        if (bindingResult.hasErrors()) {
-            return "edit";
-        }
+    public String update(@ModelAttribute("user") User user, BindingResult bindingResult, @RequestParam(value = "id") int id) {
+        if (bindingResult.hasErrors()) return "edit";
 
         userService.update(id, user);
         return "redirect:/users";
